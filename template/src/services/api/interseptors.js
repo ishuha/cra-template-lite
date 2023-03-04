@@ -1,12 +1,12 @@
 import axios from 'axios'
 
 // LocalStorageService
-import LocalStorageService from '../storage/LocalStorageService'
 
 // Add a request interseptor
 axios.interceptors.request.use(
     config => {
-        const token = LocalStorageService.getAccessToken()
+        const token = localStorage.getItem("token")
+        // const token = LocalStorageService.getAccessToken()
         if (token) {
             config.headers.Authorization = 'Bearer' + token;
             console.log("requesT WITH TOKEN");

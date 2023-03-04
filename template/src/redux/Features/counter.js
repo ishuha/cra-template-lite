@@ -1,11 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// import { fetchCount } from './counterAPI';
-
-function fetchCount(amount = 1) {
-  return new Promise((resolve) =>
-    setTimeout(() => resolve({ data: amount }), 500)
-  );
-}
+import { fetchCount } from '../../services/api/Count/counterApi';
 
 const initialState = {
   value: 0,
