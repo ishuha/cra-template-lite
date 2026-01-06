@@ -1,29 +1,48 @@
-import React, { useState } from 'react'
-import "./auth.modules.css"
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Card, Input, Button } from '../../components/common';
 
-export default function Login() {
+export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleLogin = (event) => {
+  const handleRegister = (event) => {
     event.preventDefault();
-    // handle login logic here
-    navigate('/login')
-  }
+    // Register logic here
+    navigate('/login');
+  };
 
   return (
-    <main className='login-container'>
-      <form onSubmit={handleLogin}>
-        <h2>Register Form</h2>
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" value={password} onChange={(event) => setPassword(event.target.value)} required />
-        <button type="submit">Login</button>
-        <p>Already have an account? <Link to="/login">Login now</Link>.</p>
-      </form>
-    </main>
-  )
+    <div className="u-flex-center" style={{ minHeight: '100vh', backgroundColor: 'var(--color-bg-body)' }}>
+      <Card style={{ width: '100%', maxWidth: '400px' }}>
+        <h2 className="u-text-center u-mb-md">Register</h2>
+
+        <form onSubmit={handleRegister}>
+          <Input
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <Input
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <Button type="submit" variant="primary" style={{ width: '100%', marginTop: '1rem' }}>
+            Register
+          </Button>
+        </form>
+
+        <p className="u-text-center u-text-muted" style={{ marginTop: '1rem' }}>
+          Already have an account? <Link to="/login">Login now</Link>.
+        </p>
+      </Card>
+    </div>
+  );
 }

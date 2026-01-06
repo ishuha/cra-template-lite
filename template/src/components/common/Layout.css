@@ -1,0 +1,114 @@
+/* src/components/common/Layout.css */
+
+.lite-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-bg-body);
+}
+
+.lite-layout__sidebar {
+  width: 250px;
+  background-color: var(--color-bg-sidebar);
+  border-right: 1px solid var(--color-border);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  z-index: 50;
+}
+
+.lite-layout__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 250px;
+  /* Width of sidebar */
+  min-width: 0;
+  transition: margin-left 0.3s ease;
+}
+
+.lite-layout__header {
+  height: 64px;
+  background-color: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-xl);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  /* Glassmorphism attempt */
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+[data-theme='dark'] .lite-layout__header {
+  background-color: rgba(30, 30, 40, 0.8);
+}
+
+.lite-layout__content {
+  flex: 1;
+  padding: var(--spacing-xl);
+  overflow-y: auto;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .lite-layout__sidebar {
+    transform: translateX(-100%);
+  }
+
+  .lite-layout__sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .lite-layout__main {
+    margin-left: 0;
+  }
+}
+
+/* Sidebar Specifics */
+.lite-sidebar__logo {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  color: var(--color-primary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.lite-sidebar__nav {
+  padding: var(--spacing-md) 0;
+}
+
+.lite-sidebar__link {
+  display: block;
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--color-text-main);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.lite-sidebar__link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+}
+
+.lite-sidebar__link.active {
+  background-color: rgba(var(--color-primary-h), var(--color-primary-s), 95%, 0.5);
+  /* Hacky hsl alpha */
+  color: var(--color-primary);
+  border-left-color: var(--color-primary);
+  /* Use bg variables properly if available, else plain */
+  background-color: var(--color-bg-body);
+}
+
+[data-theme='dark'] .lite-sidebar__link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}

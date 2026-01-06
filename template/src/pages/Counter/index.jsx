@@ -1,4 +1,4 @@
-import React, { useState }  from 'react'
+import React, { useState } from 'react'
 import "./counter.modules.css"
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -50,7 +50,7 @@ export default function CounterPage() {
           Add Amount
         </button>
         <button
-          className={'asyncButton'}
+          className={'asyncButton button'}
           onClick={() => dispatch(incrementAsync(incrementValue))}
         >
           Add Async

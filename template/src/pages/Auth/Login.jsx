@@ -1,41 +1,66 @@
-import React, { useState } from 'react'
-import "./auth.modules.css"
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../services/Auth';
+import { Card, Input, Button, StatusMessage } from '../../components/common';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState({ show:false, msg:'Email and Password both are required' }) ;
-  const navigate = useNavigate()
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = (event) => {
     event.preventDefault();
-    // handle login logic here
-    if ( email === 'email@email.com' && password === 'password' ) {
-      login('data')
-      navigate('/')
-    } else {
-      setError( { show: true , msg: 'try email@email.com and password' } )
-    }
-    setTimeout(() => {
-      setError({ show:false, msg:'Email and Password both are required' })
-    }, 2500);
-  }
+    setError('');
+    setLoading(true);
 
-  const {show:showError, msg:errorMessage} = error
+    // Simulate network delay
+    setTimeout(() => {
+      if (email === 'email@email.com' && password === 'password') {
+        login('data');
+        navigate('/');
+      } else {
+        setError('Try email@email.com and password');
+        setLoading(false);
+      }
+    }, 1000);
+  };
+
   return (
-    <main className='login-container'>
-      <form onSubmit={handleLogin}>
-        <h2>Login Form</h2>
-        <label htmlFor="email">Email:</label>
-        <input type="email" id="email" name="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" value={password} onChange={(event) => setPassword(event.target.value)} required />
-        <button type="submit">Login</button>
-        <div className='error-message'> {showError ? '* '+errorMessage : " "} </div>
-        <p>Don't have an account? <Link to="/register">Register now</Link>.</p>
-      </form>
-    </main>
-  )
+    <div className="u-flex-center" style={{ minHeight: '100vh', backgroundColor: 'var(--color-bg-body)' }}>
+      <Card style={{ width: '100%', maxWidth: '400px' }}>
+        <h2 className="u-text-center u-mb-md">Login</h2>
+
+        <StatusMessage type="error" message={error} onClose={() => setError('')} />
+
+        <form onSubmit={handleLogin}>
+          <Input
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="email@email.com"
+          />
+          <Input
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder="password"
+          />
+
+          <Button type="submit" variant="primary" style={{ width: '100%', marginTop: '1rem' }} isLoading={loading}>
+            Login
+          </Button>
+        </form>
+
+        <p className="u-text-center u-text-muted" style={{ marginTop: '1rem' }}>
+          Don't have an account? <Link to="/register">Register now</Link>.
+        </p>
+      </Card>
+    </div>
+  );
 }
