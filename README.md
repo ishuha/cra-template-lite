@@ -8,12 +8,14 @@ A lightweight, feature-packed template for [Create React App](https://github.com
 -   **Routing**: [React Router 6](https://reactrouter.com/) with protected route implementation.
 -   **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/) setup for scalable state management.
 -   **API Handling**: [Axios](https://axios-http.com/) configured with interceptors for streamlined API requests.
+-   **Demo Integration**: Includes a demonstration using [JSONPlaceholder](https://jsonplaceholder.typicode.com/) to showcase API handling, loading states, and error management.
 -   **Folder Structure**: A scalable and organized directory structure best suited for small to medium-sized projects.
 
 ## 🛠 Features
 
 -   **Clean & Lightweight**: No unnecessary bloat, just the essentials.
 -   **Authentication Flow**: Includes a basic structure for Login and Protected Home routes.
+-   **Example Implementations**: Contains examples for API integration (success/error states) using a mock backend.
 -   **Modular Architecture**: Components, Pages, and Services are logically separated.
 -   **Production Ready**: Includes `serve` for testing production builds locally.
 
